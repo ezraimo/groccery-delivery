@@ -1,10 +1,10 @@
 // List of groceries with images
 const groceries = [
-    { name: "Apples", image: "https://via.placeholder.com/100?text=Apples" },
-    { name: "Bananas", image: "https://via.placeholder.com/100?text=Bananas" },
-    { name: "Carrots", image: "https://via.placeholder.com/100?text=Carrots" },
-    { name: "Tomatoes", image: "https://via.placeholder.com/100?text=Tomatoes" },
-    { name: "Milk", image: "https://via.placeholder.com/100?text=Milk" }
+    { name: "Apples", image: "/images/apples.png" },
+    { name: "Bananas", image: "/images/bananas.png" },
+    { name: "Carrots", image: "/images/carrots.png" },
+    { name: "Tomatoes", image: "/images/tomatoes.png" },
+    { name: "Milk", image: "/images/milk.png" }
 ];
 
 let cart = []; // Cart array to store selected groceries
