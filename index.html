@@ -22,8 +22,10 @@
         <div class="search-container">
             <input type="text" id="locationInput" placeholder="Enter your location">
             <button class="search-btn" onclick="startOrdering()">Find Groceries</button>
-            <p id="message"></p>
+            <button class="location-btn" onclick="getLocation()">📍 Use My Location</button>
+            <p id="userLocation"></p> <!-- Shows detected location -->
         </div>
+        
 
         <h2 class="section-title">Available Groceries Near You</h2>
         <div id="groceryList" class="grocery-container"></div>

@@ -90,3 +90,64 @@ function signUp() {
 
 // Load groceries when the page loads
 document.addEventListener("DOMContentLoaded", loadGroceries);
+
+// Function to get user's location
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+// Success callback: Gets coordinates
+function success(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    
+    // Fetch the human-readable address
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+        .then(response => response.json())
+        .then(data => {
+            const address = data.display_name;
+            document.getElementById("userLocation").textContent = "📍 Your Location: " + address;
+            
+            // Now, fetch nearby groceries based on this location
+            loadNearbyGroceries(lat, lon);
+        })
+        .catch(() => alert("Failed to get address."));
+}
+
+// Error callback
+function error() {
+    alert("Unable to retrieve location.");
+}
+
+// Load groceries near user
+function loadNearbyGroceries(lat, lon) {
+    const groceryList = document.getElementById("groceryList");
+    groceryList.innerHTML = "<p>Finding stores near you...</p>";
+
+    // Simulated nearby groceries (In a real app, fetch from backend)
+    setTimeout(() => {
+        const nearbyGroceries = [
+            { name: "Local Market", image: "https://via.placeholder.com/100?text=Market", distance: "500m away" },
+            { name: "Fresh Grocery", image: "https://via.placeholder.com/100?text=Fresh", distance: "1.2km away" },
+            { name: "Organic Store", image: "https://via.placeholder.com/100?text=Organic", distance: "2km away" }
+        ];
+        
+        groceryList.innerHTML = ""; // Clear previous list
+        nearbyGroceries.forEach(store => {
+            const item = document.createElement("div");
+            item.classList.add("grocery-item");
+            
+            item.innerHTML = `
+                <img src="${store.image}" alt="${store.name}">
+                <p>${store.name} <small>(${store.distance})</small></p>
+                <button class="add-to-cart" onclick="addToCart('${store.name}')">Add to Cart</button>
+            `;
+
+            groceryList.appendChild(item);
+        });
+    }, 2000); // Simulate API response delay
+}
