@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <h1>Grocery Delivery</h1>
+            <div class="auth-buttons">
+                <button class="auth-btn" onclick="login()">Log In</button>
+                <button class="auth-btn signup" onclick="signUp()">Sign Up</button>
+                <button class="cart-btn" onclick="openCart()">🛒 View Cart (<span id="cartCount">0</span>)</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="search-container">
+            <input type="text" id="locationInput" placeholder="Enter your location">
+            <button class="search-btn" onclick="startOrdering()">Find Groceries</button>
+            <p id="message"></p>
+        </div>
+
+        <h2 class="section-title">Available Groceries Near You</h2>
+        <div id="groceryList" class="grocery-container"></div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <ul id="cartItems"></ul>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
