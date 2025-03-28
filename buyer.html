@@ -41,9 +41,48 @@
         </ul>
     </div>
 
-    <!-- Grocery List Section -->
+    <div class="search-container">
+        
+        <!-- Search Bar -->
+        <input type="text" id="locationInput" placeholder="Search for groceries...">
+        <button class="search-btn" onclick="startOrdering()">Find Groceries</button>
+    
+        <!-- Delivery Location Input -->
+        
+        <input type="text" id="deliveryLocation" placeholder="Enter delivery location">
+        <button class="location-btn" onclick="getLocation()">📍 Use My Location</button>
+        <ul id="locationSuggestions" class="suggestions-list"></ul>
+    
+
+        <!-- Location Display & Actions -->
+        <!-- Location Display -->
+<p id="userLocation" class="location-display" data-lat="" data-lon=""> Location: Not detected</p>
+
+<!-- Buttons -->
+<button class="location-btn" onclick="getLocation()"></button>
+<button class="map-btn" onclick="showOnMap()">🗺 Show in Map</button>
+<button class="share-btn" onclick="shareLocation()">📤 Share My Location</button>
+
+
+
+
+    </div>
+    
     <h2 class="section-title">Available Groceries Near You</h2>
-    <div id="groceryList" class="grocery-container"></div>
+<div id="groceryList" class="grocery-container"></div>
+
+
+
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCart()">&times;</span>
+        <h2>Your Cart</h2>
+        <ul id="cartItems"></ul>
+        <p><strong>Total:</strong> $<span id="cartTotal">0.00</span></p>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+</div>
 
     <script src="index.js"></script> <!-- Separate JavaScript file -->
 </body>
