@@ -535,3 +535,40 @@ document.addEventListener("DOMContentLoaded", function () {
         ordersList.appendChild(li);
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Toggle dropdowns
+    function toggleDropdown(id) {
+        var dropdown = document.getElementById(id);
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    window.toggleDropdown = toggleDropdown; // Make function global
+
+    // Retrieve grocery list from localStorage
+    const groceries = JSON.parse(localStorage.getItem("groceries")) || [];
+    const groceryListContainer = document.getElementById("groceryList");
+
+    if (groceries.length > 0) {
+        groceries.forEach(grocery => {
+            let item = document.createElement("div");
+            item.classList.add("grocery-item");
+            item.innerHTML = `
+                <img src="${grocery.image || 'placeholder.jpg'}" alt="${grocery.name}">
+                <h3>${grocery.name}</h3>
+                <p>Price: $${grocery.price.toFixed(2)}</p>
+                <button onclick="addToCart('${grocery.id}')">Add to Cart</button>
+            `;
+            groceryListContainer.appendChild(item);
+        });
+    } else {
+        groceryListContainer.innerHTML = "<p>No groceries available.</p>";
+    }
+});
+
+// Function to add items to cart
+function addToCart(itemId) {
+    alert(`Added item ${itemId} to cart!`);
+}
+

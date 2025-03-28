@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buyer Dashboard</title>
-    <link rel="stylesheet" href="buyer.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -41,33 +41,10 @@
         </ul>
     </div>
 
-    <!-- Grocery List Section (Imported from Previous Page) -->
+    <!-- Grocery List Section -->
     <h2 class="section-title">Available Groceries Near You</h2>
     <div id="groceryList" class="grocery-container"></div>
 
-    <script>
-        function toggleDropdown(id) {
-            var dropdown = document.getElementById(id);
-            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-        }
-
-        // Retrieve grocery list from previous page
-        document.addEventListener("DOMContentLoaded", function () {
-            const groceries = JSON.parse(localStorage.getItem("groceries")) || [];
-            const groceryListContainer = document.getElementById("groceryList");
-
-            if (groceries.length > 0) {
-                groceries.forEach(grocery => {
-                    let item = document.createElement("div");
-                    item.classList.add("grocery-item");
-                    item.innerHTML = `<h3>${grocery.name}</h3><p>Price: $${grocery.price}</p>`;
-                    groceryListContainer.appendChild(item);
-                });
-            } else {
-                groceryListContainer.innerHTML = "<p>No groceries available.</p>";
-            }
-        });
-    </script>
-
+    <script src="index.js"></script> <!-- Separate JavaScript file -->
 </body>
 </html>
