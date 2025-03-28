@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard</title>
+    <link rel="stylesheet" href="buyer.css">
+</head>
+<body>
+
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <h1>Welcome, <span id="buyerName">Buyer</span>!</h1>
+
+        <div class="header-icons">
+            <!-- Notifications Button -->
+            <button class="icon-btn" onclick="toggleDropdown('notificationsDropdown')">🔔 Notifications</button>
+
+            <!-- Orders Button -->
+            <button class="icon-btn" onclick="toggleDropdown('ordersDropdown')">📦 My Orders</button>
+        </div>
+    </header>
+
+    <!-- Notifications Dropdown -->
+    <div id="notificationsDropdown" class="dropdown-content">
+        <h3>🔔 Notifications</h3>
+        <ul>
+            <li><strong>Unread:</strong> You have 2 new messages</li>
+            <li><strong>Read:</strong> Delivery update received</li>
+            <li><strong>Complaints:</strong> Issue resolved</li>
+        </ul>
+    </div>
+
+    <!-- Orders Dropdown -->
+    <div id="ordersDropdown" class="dropdown-content">
+        <h3>📦 My Orders</h3>
+        <ul>
+            <li><strong>Delivered:</strong> Order #1234</li>
+            <li><strong>On Transit:</strong> Order #5678</li>
+            <li><strong>Canceled:</strong> Order #91011</li>
+        </ul>
+    </div>
+
+    <!-- Grocery List Section (Imported from Previous Page) -->
+    <h2 class="section-title">Available Groceries Near You</h2>
+    <div id="groceryList" class="grocery-container"></div>
+
+    <script>
+        function toggleDropdown(id) {
+            var dropdown = document.getElementById(id);
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        // Retrieve grocery list from previous page
+        document.addEventListener("DOMContentLoaded", function () {
+            const groceries = JSON.parse(localStorage.getItem("groceries")) || [];
+            const groceryListContainer = document.getElementById("groceryList");
+
+            if (groceries.length > 0) {
+                groceries.forEach(grocery => {
+                    let item = document.createElement("div");
+                    item.classList.add("grocery-item");
+                    item.innerHTML = `<h3>${grocery.name}</h3><p>Price: $${grocery.price}</p>`;
+                    groceryListContainer.appendChild(item);
+                });
+            } else {
+                groceryListContainer.innerHTML = "<p>No groceries available.</p>";
+            }
+        });
+    </script>
+
+</body>
+</html>

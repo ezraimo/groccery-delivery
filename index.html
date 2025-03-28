@@ -7,40 +7,105 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <!-- Header -->
     <header>
         <div class="nav">
             <h1>Grocery Delivery</h1>
             <div class="auth-buttons">
-                <button class="auth-btn" onclick="login()">Log In</button>
-                <button class="auth-btn signup" onclick="signUp()">Sign Up</button>
-                <button class="cart-btn" onclick="openCart()">🛒 View Cart (<span id="cartCount">0</span>)</button>
+                <button class="auth-btn" onclick="openLoginModal()">Log In</button>
+                <button class="auth-btn signup" onclick="openRoleSelection()">Sign Up</button>
+                <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
             </div>
         </div>
     </header>
 
-    <main>
-        <div class="search-container">
-            <input type="text" id="locationInput" placeholder="Enter your location">
-            <button class="search-btn" onclick="startOrdering()">Find Groceries</button>
-            <button class="location-btn" onclick="getLocation()">📍 Use My Location</button>
-            <p id="userLocation"></p> <!-- Shows detected location -->
-        </div>
+    <div class="search-container">
         
+        <!-- Search Bar -->
+        <input type="text" id="locationInput" placeholder="Search for groceries...">
+        <button class="search-btn" onclick="startOrdering()">Find Groceries</button>
+    
+        <!-- Delivery Location Input -->
+        
+        <input type="text" id="deliveryLocation" placeholder="Enter delivery location">
+        <button class="location-btn" onclick="getLocation()">📍 Use My Location</button>
+        <ul id="locationSuggestions" class="suggestions-list"></ul>
+    
 
-        <h2 class="section-title">Available Groceries Near You</h2>
-        <div id="groceryList" class="grocery-container"></div>
-    </main>
+        <!-- Location Display & Actions -->
+        <!-- Location Display -->
+<p id="userLocation" class="location-display" data-lat="" data-lon=""> Location: Not detected</p>
 
-    <!-- Cart Modal -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCart()">&times;</span>
-            <h2>Your Cart</h2>
-            <ul id="cartItems"></ul>
-            <button class="checkout-btn" onclick="checkout()">Checkout</button>
-        </div>
+<!-- Buttons -->
+<button class="location-btn" onclick="getLocation()"></button>
+<button class="map-btn" onclick="showOnMap()">🗺 Show in Map</button>
+<button class="share-btn" onclick="shareLocation()">📤 Share My Location</button>
+
+
+
+
     </div>
+    
+    <h2 class="section-title">Available Groceries Near You</h2>
+<div id="groceryList" class="grocery-container"></div>
+
+
+
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCart()">&times;</span>
+        <h2>Your Cart</h2>
+        <ul id="cartItems"></ul>
+        <p><strong>Total:</strong> $<span id="cartTotal">0.00</span></p>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+</div>
+
+ <!-- Role Selection Modal -->
+ <div id="roleModal" class="modal">
+    <div class="modal-content">
+        <h2>Sign Up As</h2>
+        <button class="role-btn" onclick="navigateToSignup('buyer')">Buyer</button>
+        <button class="role-btn" onclick="showSellerSignup()">Seller</button>
+        <button class="close-btn" onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+  
+
+    
+    
 
     <script src="index.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
+    <div id="sellerDashboard" class="seller-dashboard" style="display: none;">
+        <h1>Seller Dashboard</h1>
+        <p>Manage your stock, orders, and sales.</p>
+    </div>
+    
+
+
+<!-- Login Role Selection Modal -->
+<div id="loginRoleModal" class="modal">
+    <div class="modal-content">
+        <h2>Log In As</h2>
+        <button class="role-btn" onclick="showDashboard('buyer')">Buyer</button>
+        <button class="role-btn" onclick="showDashboard('seller')">Seller</button>
+        <button class="close-btn" onclick="closeLoginModal()">Cancel</button>
+    </div>
+</div>
+
+
+
+<!-- Buyer Dashboard (Hidden Initially) -->
+<div id="buyerDashboard" class="dashboard" style="display: none;">
+    <h1>Welcome Buyer!</h1>
+    <p>Browse and order groceries easily.</p>
+    <button onclick="openCart()">🛒 View Cart</button>
+</div>
+
+    
 </body>
 </html>
