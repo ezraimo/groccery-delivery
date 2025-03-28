@@ -41,38 +41,10 @@
         </ul>
     </div>
 
-    <div class="search-container">
-        
-        <!-- Search Bar -->
-        <input type="text" id="locationInput" placeholder="Search for groceries...">
-        <button class="search-btn" onclick="startOrdering()">Find Groceries</button>
-    
-        <!-- Delivery Location Input -->
-        
-        <input type="text" id="deliveryLocation" placeholder="Enter delivery location">
-        <button class="location-btn" onclick="getLocation()">📍 Use My Location</button>
-        <ul id="locationSuggestions" class="suggestions-list"></ul>
-    
-
-        <!-- Location Display & Actions -->
-        <!-- Location Display -->
-<p id="userLocation" class="location-display" data-lat="" data-lon=""> Location: Not detected</p>
-
-<!-- Buttons -->
-<button class="location-btn" onclick="getLocation()"></button>
-<button class="map-btn" onclick="showOnMap()">🗺 Show in Map</button>
-<button class="share-btn" onclick="shareLocation()">📤 Share My Location</button>
-
-
-
-
-    </div>
-    
+    <!-- Grocery List Section -->
     <h2 class="section-title">Available Groceries Near You</h2>
-<div id="groceryList" class="grocery-container"></div>
-
-
-
+    <div id="groceryList" class="grocery-container"></div>
+    
 <!-- Cart Modal -->
 <div id="cartModal" class="modal">
     <div class="modal-content">
